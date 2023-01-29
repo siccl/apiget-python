@@ -1,8 +1,3 @@
-# symple generate jwt token
-# get url with token
-# get data from url
-# show result
-
 import requests
 import jwt
 import datetime
