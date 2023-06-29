@@ -11,7 +11,27 @@ load_dotenv()
 def get_token():
     secret_key = os.getenv('SECRET_KEY')
     now = datetime.datetime.utcnow()
-    token = jwt.encode({'exp': now + datetime.timedelta(minutes=10), 'iss': os.getenv('APIKEY')}, secret_key, algorithm='HS256')
+    token = jwt.encode(
+        {
+            'exp': now + datetime.timedelta(minutes=10), 
+            'iss': os.getenv('APIKEY'),
+            'nbf': now
+            # "jti" (JWT ID) Claim
+            # "iat" (Issued At) Claim
+            # "aud" (Audience) Claim
+            # "sub" (Subject) Claim
+            # "exp" (Expiration Time) Claim
+            # "nbf" (Not Before) Claim
+            # "iss" (Issuer) Claim
+            # "prn" (Principal) Claim
+            # "cty" (Content Type) Claim
+            # "kid" (Key ID) Claim
+         },
+         secret_key, 
+         algorithm='HS256'
+        # "alg" (Algorithm) Claim
+        # "typ" (Type) Claim : "JWT"
+    )
     return token
 
 # get url with token
